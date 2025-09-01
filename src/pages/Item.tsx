@@ -1,0 +1,200 @@
+import {
+  Button,
+  CircularProgress,
+  Container,
+  FormControl,
+  IconButton,
+  InputLabel,
+  MenuItem,
+  Paper,
+  Select,
+  styled,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TextField,
+} from "@mui/material";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import SearchIcon from "@mui/icons-material/Search";
+
+const StyledHeading = styled("div")`
+  margin: 20px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const StyledSearchSelect = styled("div")`
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  width: 50%;
+`;
+
+const StyledSearch = styled("div")`
+  position: relative;
+  display: flex;
+  gap: 10px;
+  width: 300px;
+`;
+
+const StyledSearchIcon = styled(SearchIcon)`
+  position: absolute;
+  top: 30%;
+  right: 5%;
+`;
+
+const StyledSearchInput = styled(TextField)`
+  width: 100%;
+  text-align: center;
+  background-color: white;
+
+  input {
+    padding-right: 30%;
+  }
+`;
+
+const StyledSelect = styled(Select)`
+  width: 150px;
+  background-color: white;
+`;
+
+const Item = () => {
+  const [items, setItems] = useState<any>();
+  const [search, setSearch] = useState<string>("");
+  const [searchBy, setSearchBy] = useState<string>("byName");
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const getItems = async () => {
+      try {
+        const response = await axios.get("http://localhost:4000/api/v1/item");
+        setItems(response.data.items);
+        console.log(response);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getItems();
+  }, []);
+
+  let filteredItems = items;
+
+  if (searchBy === "byName") {
+    filteredItems = search
+      ? items.filter((item: any) =>
+          item.nameFull.toLowerCase().includes(search.toLowerCase())
+        )
+      : items;
+  } else {
+    filteredItems = search
+      ? items.filter((item: any) =>
+          item.id.toLowerCase().includes(search.toLowerCase())
+        )
+      : items;
+  }
+
+  return (
+    <Container>
+      <StyledHeading>
+        <h1>Items</h1>
+        <Button variant="contained" onClick={() => navigate("/create-item")}>
+          Create
+        </Button>
+      </StyledHeading>
+      <StyledSearchSelect>
+        <StyledSearch>
+          <StyledSearchInput
+            label="Search item..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            variant="outlined"
+          />
+          <StyledSearchIcon onClick={() => console.log("hello")} />
+        </StyledSearch>
+
+        <FormControl>
+          <InputLabel>Search By</InputLabel>
+
+          <StyledSelect
+            value={searchBy}
+            onChange={(e: any) => setSearchBy(e.target.value)}
+            variant="outlined"
+            label="Search by"
+          >
+            <MenuItem value="byName">Name</MenuItem>
+            <MenuItem value="byID">ID</MenuItem>
+          </StyledSelect>
+        </FormControl>
+      </StyledSearchSelect>
+      <TableContainer component={Paper}>
+        <Table aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Full Name</TableCell>
+              <TableCell align="center">Units in cart</TableCell>
+              <TableCell align="center">Purchase Price</TableCell>
+              <TableCell align="center">Sale Price</TableCell>
+              <TableCell align="center">Action</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {!filteredItems ? (
+              <CircularProgress />
+            ) : (
+              filteredItems.map((item: any) => {
+                return (
+                  <TableRow
+                    key={item.id}
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <TableCell component="th" scope="row">
+                      {item.nameFull}
+                    </TableCell>
+                    <TableCell align="center">{item.unitsInCarton}</TableCell>
+                    <TableCell align="center">{item.purchasePrice}</TableCell>
+                    <TableCell align="center">{item.salePrice}</TableCell>
+
+                    <TableCell align="center">
+                      <IconButton
+                        onClick={() => {
+                          navigate(`/item/${item.id}`);
+                        }}
+                        size="small"
+                      >
+                        <VisibilityIcon fontSize="small" />
+                      </IconButton>
+                      <IconButton
+                        onClick={() => {
+                          navigate(`/update-item/${item.id}`);
+                        }}
+                        size="small"
+                        color="success"
+                      >
+                        <EditIcon fontSize="small" />
+                      </IconButton>
+                      <IconButton size="small" color="error">
+                        <DeleteIcon fontSize="small" />
+                      </IconButton>
+                    </TableCell>
+                  </TableRow>
+                );
+              })
+            )}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Container>
+  );
+};
+
+export default Item;
