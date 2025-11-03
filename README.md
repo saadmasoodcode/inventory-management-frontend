@@ -37,3 +37,7 @@ A web application built with **React**, **TypeScript**, and **Material-UI** for 
 ## 🔗 Backend Integration
 
 The frontend interacts with a **Node.js backend** (assumed) via **REST API** endpoints for all CRUD operations and reporting.
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+![App Logo](./assets/Screenshot 2025-09-15 104347.png)
