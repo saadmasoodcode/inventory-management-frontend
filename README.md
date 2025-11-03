@@ -40,4 +40,15 @@ The frontend interacts with a **Node.js backend** (assumed) via **REST API** end
 
 -----------------------------------------------------------------------------------------------------------------------------
 
-![App Logo](./src/assets/Screenshot%202025-09-15%20104347.png)
+![AppImages](./src/assets/Screenshot%202025-09-15%20104347.png)
+![AppImages](./src/assets/Screenshot%202025-09-15%20104443.png)
+![AppImages](./src/assets/Screenshot%202025-09-15%20104730.png)
+![AppImages](./src/assets/Screenshot%202025-09-15%20104752.png)
+![AppImages](./src/assets/Screenshot%202025-09-15%20104820.png)
+![AppImages](./src/assets/Screenshot%202025-09-15%20104911.png)
+![AppImages](./src/assets/Screenshot%202025-09-15%20104930.png)
+![AppImages](./src/assets/Screenshot%202025-09-15%20104955.png)
+![AppImages](./src/assets/Screenshot%202025-09-15%20105348.png)
+![AppImages](./src/assets/Screenshot%202025-09-15%20105403.png)
+![AppImages](./src/assets/Screenshot%202025-09-15%20105511.png)
+
