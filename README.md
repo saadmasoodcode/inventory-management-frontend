@@ -1,54 +1,39 @@
-# React + TypeScript + Vite
+# Inventory Management
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A web application built with **React**, **TypeScript**, and **Material-UI** for managing inventory, sales, purchases, and party relationships (companies, customers, salesmen).
 
-Currently, two official plugins are available:
+## 🚀 Key Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Party Management:** Create, view, update, and delete companies, customers, and salesmen.  
+- **Item Management:** Full CRUD operations for items, including purchase/sale pricing and unit management.  
+- **Purchase Invoices:** Create and manage purchase invoices with item selection, quantity, pricing, and narration.  
+- **Sale Invoices:** Generate sales invoices with customer, company, and salesman associations.  
+- **Reports:** Generate item-wise invoice reports with filtering by date and invoice type.  
+- **Responsive UI:** Clean, modern interface built with Material-UI and custom styling.  
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Frontend:** React, TypeScript, Material-UI, React Hook Form, Yup Validation  
+- **State Management:** React Hook Form, useState, useEffect  
+- **HTTP Client:** Axios  
+- **Routing:** React Router DOM  
+- **Backend API:** RESTful endpoints (e.g., `/api/v1/party`, `/api/v1/item`, `/api/v1/inventoryTransaction`)  
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## 📦 Modules
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- **Parties:** Manage companies, customers, and salesmen.  
+- **Items:** Manage product catalog with company association.  
+- **Purchase:** Create and view purchase invoices.  
+- **Sales:** Create and view sales invoices.  
+- **Reports:** View item invoice reports with filters.  
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🧩 Notable Components
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+- `AddPurchaseInvoiceItem` / `AddSaleInvoiceItem`: Modal forms for adding items to invoices.  
+- `AddPurchaseItemList` / `AddSaleItemList`: Tabular displays of invoice items with edit/delete actions.  
+- `CreatePurchaseInvoice` / `CreateSaleInvoice`: Full invoice creation forms with validation.  
+- `ItemInvoicesReport`: Report generation with date and type filters.  
+
+## 🔗 Backend Integration
+
+The frontend interacts with a **Node.js backend** (assumed) via **REST API** endpoints for all CRUD operations and reporting.
