@@ -40,4 +40,4 @@ The frontend interacts with a **Node.js backend** (assumed) via **REST API** end
 
 -----------------------------------------------------------------------------------------------------------------------------
 
-![App Logo](./assets/Screenshot 2025-09-15 104347.png)
+![App Logo](./src/assets/Screenshot%202025-09-15%20104347.png)
